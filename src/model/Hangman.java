@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import javafx.scene.image.Image;
 
 public class Hangman {
 
@@ -37,7 +36,7 @@ public class Hangman {
 
 			output = this.wordList.get(rand.nextInt(this.wordList.size() - 1));
 		}
-		//System.out.println("Random Word: " + output);
+		// System.out.println("Random Word: " + output);
 		return output;
 	}
 
@@ -53,9 +52,9 @@ public class Hangman {
 	public boolean evaluateEntry(String entry, String word, String hiddenWord, String usedLetters) {
 		if (entry.equals(word)) {
 			return true;
-		}
-
-		if (entry.length() > 1) {
+		} else if (!entry.matches("[A-Za-z]")) {
+			return false;
+		} else if (entry.length() > 1) {
 			return false;
 		} else if (usedLetters.contains(entry)) {
 			return false;
@@ -78,16 +77,8 @@ public class Hangman {
 		for (int i = 0; i < word.length(); i++) {
 			if (word.charAt(i) == ' ') {
 				hiddenWord += " ";
-			} else if (word.charAt(i) == '\'') {
-				hiddenWord += "'";
-			} else if (word.charAt(i) == ',') {
-				hiddenWord += ",";
-			} else if (word.charAt(i) == '!') {
-				hiddenWord += "!";
-			} else if (word.charAt(i) == '?') {
-				hiddenWord += "?";
-			} else if (word.charAt(i) == ':') {
-				hiddenWord += ":";
+			} else if (!(word.charAt(i) + "").matches("[A-Za-z]")) {
+				hiddenWord += word.charAt(i) + "";
 			} else {
 				hiddenWord += "_";
 			}

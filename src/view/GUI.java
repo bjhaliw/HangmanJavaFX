@@ -169,17 +169,16 @@ public class GUI extends Application {
 				break;
 			}
 
-			return;
-		}
+		} else {
+			String newWord = this.hangman.revealHiddenLetters(word, hiddenWord.getText(), entry.getText());
 
-		String newWord = this.hangman.revealHiddenLetters(word, hiddenWord.getText(), entry.getText());
+			hiddenWord.setText(newWord);
 
-		hiddenWord.setText(newWord);
-
-		if (this.hangman.checkIfWin(hiddenWord.getText(), word)) {
-			System.out.println("Player Wins!");
-			view.setImage(new Image("/win.png"));
-			entry.setEditable(false);
+			if (this.hangman.checkIfWin(hiddenWord.getText(), word)) {
+				System.out.println("Player Wins!");
+				view.setImage(new Image("/win.png"));
+				entry.setEditable(false);
+			}
 		}
 
 		usedLetters.setText(usedLetters.getText() + " " + entry.getText());
